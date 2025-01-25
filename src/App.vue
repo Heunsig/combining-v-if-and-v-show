@@ -1,14 +1,14 @@
 <script setup>
-import { ref, shallowRef, watch } from 'vue';
+import { onMounted, ref, shallowRef, watch } from 'vue';
 import Tab1 from './components/Tab1.vue';
 import Tab2 from './components/Tab2.vue';
 import Tab3 from './components/Tab3.vue';
 
 const currentTab = ref(1);
 const tabs = shallowRef([
-  { id: 1, title: 'Tab 1', component: Tab1, isRendered: false },
-  { id: 2, title: 'Tab 2', component: Tab2, isRendered: false },
-  { id: 3, title: 'Tab 3', component: Tab3, isRendered: false },
+  { id: 1, title: 'Tab 1 - Light Component', component: Tab1, isRendered: false },
+  { id: 2, title: 'Tab 2 - Heavy Component', component: Tab2, isRendered: false },
+  { id: 3, title: 'Tab 3 - Light Component', component: Tab3, isRendered: false },
 ]);
 
 watch(currentTab, (newVal) => {
@@ -20,6 +20,11 @@ watch(currentTab, (newVal) => {
     tab.isRendered = tab.id === newVal;
   });
 }, { immediate: true });
+
+console.time('App mounted');
+onMounted(() => {
+  console.timeEnd('App mounted');
+});
 </script>
 
 <template>
