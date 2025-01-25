@@ -1,9 +1,13 @@
 <script setup>
 import { onMounted } from 'vue';
+import { useRenderTime } from '../store';
 
-console.time('Tab3 mounted');
+const { start, end, increaseRenderCount } = useRenderTime();
+
+start();
 onMounted(() => {
-  console.timeEnd('Tab3 mounted');
+  end();
+  increaseRenderCount();
 });
 </script>
 

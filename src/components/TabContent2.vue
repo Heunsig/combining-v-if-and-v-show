@@ -10,6 +10,9 @@ import {
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
 import { ref, provide, onMounted } from "vue";
+import { useRenderTime } from '../store';
+
+const { start, end, increaseRenderCount } = useRenderTime();
 
 use([
   CanvasRenderer,
@@ -59,9 +62,10 @@ const option = ref({
   ]
 });
 
-console.time('Tab2 mounted');
+start();
 onMounted(() => {
-  console.timeEnd('Tab2 mounted');
+  end();
+  increaseRenderCount();
 });
 </script>
 

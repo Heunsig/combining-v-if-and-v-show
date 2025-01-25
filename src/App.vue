@@ -1,9 +1,11 @@
 <script setup>
 import { onMounted, ref, shallowRef, watch } from 'vue';
-import Tab1 from './components/Tab1.vue';
-import Tab2 from './components/Tab2.vue';
-import Tab3 from './components/Tab3.vue';
+import Tab1 from './components/TabContent1.vue';
+import Tab2 from './components/TabContemt2.vue';
+import Tab3 from './components/TabContent3.vue';
+import { useRenderTime } from './store';
 
+const { renderTime, renderCount } = useRenderTime();
 const currentTab = ref(1);
 const tabs = shallowRef([
   { id: 1, title: 'Tab 1 - Light Component', component: Tab1, isRendered: false },
@@ -21,13 +23,22 @@ watch(currentTab, (newVal) => {
   });
 }, { immediate: true });
 
-console.time('App mounted');
+
+const appT0 = ref(0);
+const appT1 = ref(0);
+
+appT0.value = performance.now();
 onMounted(() => {
-  console.timeEnd('App mounted');
+  appT1.value = performance.now();
 });
 </script>
 
 <template>
+  <div class="render-info">
+    <div>App 컴포넌트 렌더링 시간: {{ appT1 - appT0 }} ms</div>
+    <div>컴포넌트 렌더링 시간: {{ renderTime }} ms</div>
+    <div>컴포넌트 렌더링 횟수: {{ renderCount }}</div>
+  </div>
   <div class="tabs-container">
     <div class="tabs">
       <button 
@@ -55,6 +66,10 @@ onMounted(() => {
 
 
 <style scoped>
+.render-info {
+  margin: 20px;
+}
+
 .tabs-container {
   margin: 20px;
 }
