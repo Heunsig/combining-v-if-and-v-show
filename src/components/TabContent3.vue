@@ -2,12 +2,16 @@
 import { onMounted } from 'vue';
 import { useRenderTime } from '../store';
 
-const { start, end, increaseRenderCount } = useRenderTime();
+const props = defineProps({
+  start: Function,
+  end: Function,
+  increaseRenderCount: Function,
+});
 
-start();
+props.start();
 onMounted(() => {
-  end();
-  increaseRenderCount();
+  props.end();
+  props.increaseRenderCount();
 });
 </script>
 

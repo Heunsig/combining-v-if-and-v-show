@@ -1,10 +1,10 @@
 import { computed, ref } from "vue";
 
-const t0 = ref(0);
-const t1 = ref(0);
-const renderCount = ref(0);
 
 export function useRenderTime() {
+  const t0 = ref(0);
+  const t1 = ref(0);
+  const renderCount = ref(0);
 
   function start() {
     t0.value = performance.now();

@@ -12,7 +12,17 @@ import VChart, { THEME_KEY } from "vue-echarts";
 import { ref, provide, onMounted } from "vue";
 import { useRenderTime } from '../store';
 
-const { start, end, increaseRenderCount } = useRenderTime();
+const props = defineProps({
+  start: Function,
+  end: Function,
+  increaseRenderCount: Function,
+});
+
+props.start();
+onMounted(() => {
+  props.end();
+  props.increaseRenderCount();
+});
 
 use([
   CanvasRenderer,
@@ -60,12 +70,6 @@ const option = ref({
       }
     }
   ]
-});
-
-start();
-onMounted(() => {
-  end();
-  increaseRenderCount();
 });
 </script>
 
