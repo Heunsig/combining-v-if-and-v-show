@@ -35,11 +35,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="render-info">
-    <div>App 컴포넌트 렌더링 시간: {{ appT1 - appT0 }} ms</div>
-    <div>컴포넌트 렌더링 시간: {{ renderTime }} ms</div>
-    <div>컴포넌트 렌더링 횟수: {{ renderCount }}</div>
-  </div>
+  <ul class="render-info">
+    <li>Initial App Mount Time: {{ appT1 - appT0 }} ms</li>
+    <li>Tab Component Mount Time: {{ renderTime }} ms</li>
+    <li>Mount Count: {{ renderCount }}</li>
+  </ul>
   <div class="tabs-container">
     <div class="tabs">
       <button 
@@ -68,29 +68,30 @@ onMounted(() => {
   </div>
 </template>
 
-
-
 <style scoped>
 .render-info {
-  margin: 20px;
-}
+  margin-bottom: 1.25rem;  /* 20px */
+  padding: 0;
+  list-style: none;
 
-.tabs-container {
-  margin: 20px;
+  li {
+    margin-bottom: 0.25rem;  /* 4px */
+  }
 }
 
 .tabs {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+  gap: 0.625rem;  /* 10px */
+  margin-bottom: 1.25rem;  /* 20px */
+  flex-wrap: wrap;
 }
 
 .tabs button {
-  padding: 10px 20px;
+  padding: 0.625rem 1.25rem;  /* 10px 20px */
   border: none;
   background: #f0f0f0;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: 0.25rem;  /* 4px */
 }
 
 .tabs button.active {
@@ -99,8 +100,8 @@ onMounted(() => {
 }
 
 .tab-content {
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  padding: 1.25rem;  /* 20px */
+  border: 0.0625rem solid #ddd;  /* 1px */
+  border-radius: 0.25rem;  /* 4px */
 }
 </style>
